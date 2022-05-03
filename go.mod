@@ -1,4 +1,4 @@
-module solana-utils-services
+module https://github.com/karneges/go-solana-utils
 
 go 1.18
 
