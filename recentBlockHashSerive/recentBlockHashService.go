@@ -17,7 +17,10 @@ func New(client *rpc.Client, pollingInterval time.Duration) *RecentBlockHash {
 	recentBlockHashCh := make(chan solana.Hash)
 	go func() {
 		for {
-			res, _ := client.GetRecentBlockhash(context.TODO(), rpc.CommitmentRecent)
+			res, err := client.GetRecentBlockhash(context.TODO(), rpc.CommitmentRecent)
+			if err != nil {
+				panic(err)
+			}
 			recentBlockHashCh <- res.Value.Blockhash
 			time.Sleep(pollingInterval)
 		}
